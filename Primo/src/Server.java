@@ -47,7 +47,7 @@ public class Server {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
             PrintWriter out = new PrintWriter(s.getOutputStream(), true);
-            out.println("Connection acquired returning the UPPERCASE value");
+            System.out.println("Connection acquired returning the UPPERCASE value");
 
 
             String request;
@@ -57,6 +57,7 @@ public class Server {
 
                 if (request.equals("0")) {
                     try {
+                        out.println("Closing connection");
                         s.close();
                         System.out.println("Closed connection with client");
                     } catch (IOException e) {
@@ -75,4 +76,9 @@ public class Server {
         }
 
     }
+}
+
+void main() {
+    Server server = new Server(8000);
+    server.listen();
 }
